@@ -1,4 +1,4 @@
-FROM ubuntu:20.04 AS build
+FROM debian:buster AS build
 
 ENV DEBIAN_FRONTEND noninteractive
 
@@ -10,9 +10,9 @@ RUN apt-get update \
 WORKDIR /app
 COPY ./build-ffmpeg /app/build-ffmpeg
 
-RUN SKIPINSTALL=yes /app/build-ffmpeg --build
+RUN SKIPINSTALL=yes /app/build-ffmpeg --build --enable-gpl-and-non-free
 
-FROM ubuntu:20.04
+FROM debian:buster
 
 ENV DEBIAN_FRONTEND noninteractive
 
